@@ -70,7 +70,6 @@ namespace RockPaperScissors
         }
         public void DualMatch(Player person1, Player person2, int bestOfNum)
         {
-            //while (person1.GetWinCount() < bestOfNum && person2.GetWinCount() < bestOfNum)
             do
             {
                 player1Pick = GetPlayerPick(person1);
@@ -167,18 +166,23 @@ namespace RockPaperScissors
             switch (response)
             {
                 case "1":
+                    Console.Clear();
                     return allPicks[0];
                     break;
                 case "2":
+                    Console.Clear();
                     return allPicks[1];
                     break;
                 case "3":
+                    Console.Clear();
                     return allPicks[2];
                     break;
                 case "4":
+                    Console.Clear();
                     return allPicks[3];
                     break;
                 case "5":
+                    Console.Clear();
                     return allPicks[4];
                     break;
                 default:
