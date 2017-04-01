@@ -53,9 +53,14 @@ namespace RockPaperScissors
                 Console.Clear();
                 Console.WriteLine(" _______________________________________________");
                 Console.WriteLine("|                                               ");
-                Console.WriteLine("|       COMPUTERS ARE TAKING OVER THE WORLD!    ");
+                Console.WriteLine("|           'The only way you'd be able to      ");
+                Console.WriteLine("|           make a contribution to science      ");
+                Console.WriteLine("|              is if they resume sending        ");
+                Console.WriteLine("|                 chimps into space'            ");
+                Console.WriteLine("|                               - Sheldon       ");
                 Console.WriteLine("|       -----------------------------------     ");
-                Console.WriteLine("|                  You Loser!                   ");
+                Console.WriteLine("|                                               ");
+                Console.WriteLine("|                Of course AL wins!             ");
                 Console.WriteLine("|                                               ");
                 Console.WriteLine("|              Enter To Continue                ");
                 Console.WriteLine("|_______________________________________________");
