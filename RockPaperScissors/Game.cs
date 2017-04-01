@@ -47,24 +47,46 @@ namespace RockPaperScissors
         }
         public void FinishGame()
         {
-            DisplayHeader();
-            if(gameType == 2 && player1.Winner())
-            {
-                Console.WriteLine($"\nCongratulations {player1.GetName()} you WIN!!\n");
-            }
-            else if (gameType == 2 && player2.Winner())
-            {
-                Console.WriteLine($"\nCongratulations {player2.GetName()} you WIN!!\n");
-            }
-            else if(gameType == 1 && player1.Winner())
-            {
-                Console.WriteLine($"\nCongratulations {player1.GetName()} you beat Al!!\n");
-            }
-            else if(gameType == 1 && !player1.Winner())
+            if (gameType == 1 && !player1.Winner())
             {
                 Console.WriteLine($"\nOuch! {player1.GetName()} Al crushed you!!\n");
-
+                Console.Clear();
+                Console.WriteLine(" _______________________________________________");
+                Console.WriteLine("|                                               ");
+                Console.WriteLine("|       COMPUTERS ARE TAKING OVER THE WORLD!    ");
+                Console.WriteLine("|       -----------------------------------     ");
+                Console.WriteLine("|                  You Loser!                   ");
+                Console.WriteLine("|                                               ");
+                Console.WriteLine("|              Enter To Continue                ");
+                Console.WriteLine("|_______________________________________________");
+                Console.ReadLine();
             }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine(" _______________________________________________");
+                Console.WriteLine("|                                               ");
+                Console.WriteLine("|       WINNER WINNER CHICKEN DINNER!!!!!!!     ");
+                Console.WriteLine("|       -----------------------------------     ");
+                Console.WriteLine("|                                               ");
+                 if (gameType == 2 && player1.Winner())
+                {
+                    Console.WriteLine($"|                {player1.GetName()} WINS!!");
+                }
+                else if (gameType == 2 && player2.Winner())
+                {
+                    Console.WriteLine($"|                {player2.GetName()} WINS!!");
+                }
+                else if (gameType == 1 && player1.Winner())
+                {
+                    Console.WriteLine($"|                {player1.GetName()}  you beat AL!! ");
+                }
+                Console.WriteLine("|                                               ");
+                Console.WriteLine("|              Enter To Continue                             ");
+                Console.WriteLine("|_______________________________________________");
+                Console.ReadLine();
+            }
+
         }
         public bool HaveWinner()
         {

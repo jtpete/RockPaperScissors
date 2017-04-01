@@ -53,22 +53,7 @@ namespace RockPaperScissors
             }
             return compWinCount;
         }
-        private void DisplayCompResults(Player person1)
-        {
-            if (player1win)
-            {
-                Console.WriteLine($"{person1.GetName()} picks {player1Pick} and beats {player2Pick}");
-            }
-            else if (player2win)
-            {
-                Console.WriteLine($"Al picks {player2Pick} and beats {player1Pick}");
-            }
-            else
-            {
-                Console.WriteLine($"{person1.GetName()} and Al both pick {player2Pick}.  Let's try again.");
-            }
 
-        }
         public void DualMatch(Player person1, Player person2, int bestOfNum)
         {
             double bestOfLimit = (double)bestOfNum / (double)2;
