@@ -11,11 +11,16 @@ namespace RockPaperScissors
         string name;
         int winCount = 0;
         bool winner = false;
+
+        public Player(string name)
+        {
+            this.name = name;
+        }
         public void SetName()
         {
             string response;
          
-            Console.WriteLine("\nEvery player needs a name, what shall I call you?.\n");
+            Console.WriteLine($"{name} is such a boring name, what shall I call you?.\n");
             response = Console.ReadLine();
             switch (response)
             {

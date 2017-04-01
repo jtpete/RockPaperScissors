@@ -8,34 +8,35 @@ namespace RockPaperScissors
 {
     class Match
     {
-        string player1Pick;
-        string player2Pick;
+        string player1Pick = " ";
+        string player2Pick = " ";
         bool player1win = false;
         bool player2win = false;
-        string[] allPicks = { "Rock", "Paper", "Sissors", "Lizard", "Spock" };
-        string[,] winTable = new string[5, 3] { { "Rock", "Lizard", "Sissors" }, { "Sissors", "Paper", "Lizard" }, { "Paper", "Rock", "Spock" }, { "Lizard", "Paper", "Spock" }, { "Spock", "Scissors", "Rock" } };
+        string[] allPicks = { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
+        string[,] winTable = new string[5, 3] { { "Rock", "Lizard", "Scissors" }, { "Scissors", "Paper", "Lizard" }, { "Paper", "Rock", "Spock" }, { "Lizard", "Paper", "Spock" }, { "Spock", "Scissors", "Rock" } };
 
 
         public void CompMatch(Player person1, int bestOfNum)
         {
+            double bestOfLimit = (double)bestOfNum / (double)2;
+            bestOfLimit = Math.Ceiling(bestOfLimit);
             int computerWinCount = 0;
             do
             {
+                ScoreBoard(person1.GetName(), "AL", person1.GetWinCount(), computerWinCount, bestOfNum, bestOfLimit);
+                player1Pick = " ";
+                player2Pick = " ";
                 player1Pick = GetPlayerPick(person1);
+                ScoreBoard(person1.GetName(), "AL", person1.GetWinCount(), computerWinCount, bestOfNum, bestOfLimit);
                 player2Pick = GetComputerPick();
                 DetermineWinner(winTable);
-                DisplayCompResults(person1);
                 computerWinCount = SetCompWinResults(person1, computerWinCount);
-            } while (bestOfNum > 1 && person1.GetWinCount() < bestOfNum-1 && computerWinCount < bestOfNum-1);
-            SetCompMatchWinner(person1, bestOfNum);
+            } while (person1.GetWinCount() < bestOfLimit && computerWinCount < bestOfLimit);
+            SetCompMatchWinner(person1, bestOfLimit);
         }
-        private void SetCompMatchWinner(Player person1, int bestOfNum)
+        private void SetCompMatchWinner(Player person1, double bestOfLimit)
         {
-            if (bestOfNum == 1 && player1win)
-            {
-                person1.SetWinner();
-            }
-            else if (bestOfNum > 1 && person1.GetWinCount() == bestOfNum - 1)
+            if (person1.GetWinCount() == bestOfLimit)
             {
                 person1.SetWinner();
             }
@@ -70,15 +71,20 @@ namespace RockPaperScissors
         }
         public void DualMatch(Player person1, Player person2, int bestOfNum)
         {
+            double bestOfLimit = (double)bestOfNum / (double)2;
+            bestOfLimit = Math.Ceiling(bestOfLimit);
             do
             {
+                ScoreBoard(person1.GetName(), person2.GetName(), person1.GetWinCount(), person2.GetWinCount(), bestOfNum, bestOfLimit);
+                player1Pick = " ";
+                player2Pick = " ";
                 player1Pick = GetPlayerPick(person1);
+                ScoreBoard(person1.GetName(), person2.GetName(), person1.GetWinCount(), person2.GetWinCount(), bestOfNum, bestOfLimit);
                 player2Pick = GetPlayerPick(person2);
                 DetermineWinner(winTable);
-                DisplayDualResults(person1, person2);
                 setDualWinCount(person1, person2);
-            } while (bestOfNum > 1 && person1.GetWinCount() < bestOfNum - 1 && person2.GetWinCount() < bestOfNum - 1);
-            setDualWinner(person1, person2, bestOfNum);
+            } while (bestOfNum > 1 && person1.GetWinCount() < bestOfLimit && person2.GetWinCount() < bestOfLimit);
+            setDualWinner(person1, person2, bestOfLimit);
 
         }
         private void setDualWinCount(Player person1, Player person2)
@@ -92,17 +98,9 @@ namespace RockPaperScissors
                 person2.SetWinCount(1);
             }
         }
-        private void setDualWinner(Player person1, Player person2, int bestOfNum)
+        private void setDualWinner(Player person1, Player person2, double bestOfLimit)
         {
-            if (bestOfNum == 1 && player1win)
-            {
-                person1.SetWinner();
-            }
-            else if(bestOfNum == 1 && player2win)
-            {
-                person2.SetWinner();
-            }
-            else if (bestOfNum >1 && person1.GetWinCount() == bestOfNum - 1)
+            if (person1.GetWinCount() == bestOfLimit)
             {
                 person1.SetWinner();
             }
@@ -111,21 +109,7 @@ namespace RockPaperScissors
                 person2.SetWinner();
             }
         }
-        private void DisplayDualResults(Player person1, Player person2)
-        {
-            if (player1win)
-            {
-                Console.WriteLine($"{person1.GetName()} picks {player1Pick} and beats {player2Pick}");
-            }
-            else if (player2win)
-            {
-                Console.WriteLine($"{person2.GetName()} picks {player2Pick} and beats {player1Pick}");
-            }
-            else
-            {
-                Console.WriteLine($"{person1.GetName()} and {person2.GetName()} both pick {player2Pick}.  Let's try again.");
-            }
-        }
+
         private void DetermineWinner(string[,] winTable)
         {
             player1win = false;
@@ -191,6 +175,42 @@ namespace RockPaperScissors
                     break;
 
             }
+        }
+        public void ScoreBoard(string name1, string name2, int winCount1, int winCount2, int bestOfNum, double bestOfLimit)
+        {
+            Console.Clear();
+            Console.WriteLine($" _______________________________________________________ ");
+            Console.WriteLine($"            Best {bestOfLimit} out of {bestOfNum}        ");
+            Console.WriteLine($"                                                         ");
+            Console.WriteLine($"        WINS:                   PLAYER:                  ");
+            Console.WriteLine($"        {winCount1}                       {name1}        ");
+            Console.WriteLine($"----------------------VS.------------------------------- ");
+            Console.WriteLine($"        {winCount2}                       {name2}        ");
+            Console.WriteLine($"                                                         ");
+            Console.WriteLine($"        PICK RESULTS:                                    ");
+            Console.WriteLine($"-------------------------------------------------------- ");
+            if (player1Pick == " " || player2Pick == " ")
+            {
+                Console.WriteLine($"                                                      ");
+            }
+            else if (player1win)
+            {
+                Console.WriteLine($"        {name1} picks {player1Pick} and beats {player2Pick}");
+            }
+            else if (player2win)
+            {
+                Console.WriteLine($"        {name2} picks {player2Pick} and beats {player1Pick}");
+            }
+            else if(player1Pick == player2Pick)
+            {
+                Console.WriteLine($"        {name1} and {name2} both pick {player2Pick}.  Let's try again.");
+            }
+            else
+            {
+                Console.WriteLine($"                                                         ");
+            }
+            Console.WriteLine($"________________________________________________________ ");
+
         }
 
     }

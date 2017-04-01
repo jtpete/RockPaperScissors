@@ -13,6 +13,15 @@ namespace RockPaperScissors
             string response;
             do
             {
+                Console.Clear();
+                Console.WriteLine(" _______________________________________________ ");
+                Console.WriteLine("|                                               |");
+                Console.WriteLine("|       Welcome to Paper, Rock, Scissors...     |");
+                Console.WriteLine("|                                               |");
+                Console.WriteLine("|                  and yes...                   |");
+                Console.WriteLine("|                                               |");
+                Console.WriteLine("|                Lizard, Spock                  |");
+                Console.WriteLine("|_______________________________________________|");
                 Console.WriteLine("\nWould you like to begin a game...yes or no?\n");
                 response = Console.ReadLine().ToLower();
                 if (response == "yes")
